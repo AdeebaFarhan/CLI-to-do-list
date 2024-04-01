@@ -1,0 +1,22 @@
+{
+  "name": "@adeeba123/todolist",
+  "version": "1.0.3",
+  "description": "Daily routine task",
+  "main": "index.js",
+  "type": "module",
+  "publishConfig": {"access": "public"},
+  "bin":"index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^9.2.17",
+    "install": "^0.13.0",
+    "uninstall": "^0.0.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7"
+  }
+}
