@@ -3,7 +3,7 @@
 import inquirer from "inquirer";
 
 async function main() {
-  let todo = [];
+  let todo: string[] = [];
   let condition = true;
 
   while (condition) {
@@ -33,15 +33,15 @@ async function main() {
       todo.push(addTask.todo);
       condition = addTask.addMore;
     } else if (action.action === "edit") {
-      const { task } = await inquirer.prompt([
+      const { taskIndex } = await inquirer.prompt([
         {
-          name: "task",
+          name: "taskIndex",
           type: "list",
           message: "Select the task you want to edit:",
           choices: todo,
         },
       ]);
-      //const index = todo.indexOf(task); // Find the index of the selected task
+      
       const { newTask } = await inquirer.prompt([
         {
           name: "newTask",
@@ -49,7 +49,13 @@ async function main() {
           message: "Enter the new task:",
         },
       ]);
-      //todo[index] = newTask; // Update the task at the found index
+      
+      const index = todo.indexOf(taskIndex); // Find the index of the selected task
+      if (index !== -1) {
+        todo[index] = newTask; // Update the task at the found index
+      } else {
+        console.log("Invalid task index.");
+      }
     } else if (action.action === "delete") {
       const { task } = await inquirer.prompt([
         {
@@ -60,10 +66,15 @@ async function main() {
         },
       ]);
       const index = todo.indexOf(task); // Find the index of the selected task
-      todo.splice(index, 1); // Remove the task at the found index
+      if (index !== -1) {
+        todo.splice(index, 1); // Remove the task at the found index
+      } else {
+        console.log("Invalid task index.");
+      }
     } else if (action.action === "exit") {
       condition = false; // Exit the loop and end the program
     }
+    
     console.log("Current To-Do List:");
     console.log(todo.join("\n")); 
   }
